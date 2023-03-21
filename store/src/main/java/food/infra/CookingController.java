@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 // @RequestMapping(value="/cookings")
 @Transactional
 public class CookingController {
-
+// Remark
     @Autowired
     CookingRepository cookingRepository;
 
