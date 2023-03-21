@@ -23,11 +23,6 @@ public class Cooking {
 
     @PostPersist
     public void onPostPersist() {
-        Rejected rejected = new Rejected(this);
-        rejected.publishAfterCommit();
-
-        CookFinished cookFinished = new CookFinished(this);
-        cookFinished.publishAfterCommit();
     }
 
     public static CookingRepository repository() {
@@ -43,8 +38,16 @@ public class Cooking {
     }
 
     public void acceptOrder(AcceptOrderCommand acceptOrderCommand) {
-        Accepted accepted = new Accepted(this);
-        accepted.publishAfterCommit();
+
+        if(acceptOrderCommand.getStatus()){
+            Accepted accepted = new Accepted(this);
+            accepted.publishAfterCommit();
+        }else{
+            Rejected rejected = new Rejected(this);
+            rejected.publishAfterCommit();
+
+        }
+
     }
 
     public static void loadOrderInfo(OrderPlaced orderPlaced) {

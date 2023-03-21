@@ -9,5 +9,5 @@ import lombok.Data;
 public class AcceptOrderCommand {
 
     private String orderId;
-    private String status;
+    private Boolean status;
 }
